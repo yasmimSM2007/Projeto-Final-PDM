@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cardápio Offline</title>
+
+    <!-- Manifest da PWA -->
+    <link rel="manifest" href="./manifest.json" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./cardapio-offline/CSS/style.css" />
+  </head>
+
+  <body>
+    <!-- ===================================== -->
+    <!--  BLOCO DA CÂMERA (igual aos slides)   -->
+    <!-- ===================================== -->
+    <main id="camera">
+      <!-- Camera sensor -->
+      <canvas id="camera--sensor"></canvas>
+      <!-- Camera view -->
+      <video id="camera--view" autoplay playsinline></video>
+      <!-- Camera output -->
+      <img src="//:0" alt="" id="camera--output" />
+      <!-- Camera trigger -->
+      <button id="camera--trigger">Tirar foto</button>
+    </main>
+
+    <!-- ===================================== -->
+    <!--  BLOCO DO CARDÁPIO OFFLINE           -->
+    <!-- ===================================== -->
+    <section id="menu">
+      <h1>Cardápio Offline</h1>
+
+      <form id="dish-form">
+        <input id="name" placeholder="Nome do prato" required />
+        <input id="price" placeholder="Preço (ex: 12.00)" required />
+        <textarea id="description" placeholder="Descrição"></textarea>
+        <button type="submit">Salvar prato</button>
+      </form>
+
+      <h2>Pratos salvos</h2>
+      <div id="dishes-list"></div>
+    </section>
+
+    <!-- JS principal -->
+    <script src="./cardapio-offline/js/main.js"></script>
+  </body>
+</html>

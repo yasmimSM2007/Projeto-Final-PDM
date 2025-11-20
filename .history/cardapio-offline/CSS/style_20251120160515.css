@@ -1,0 +1,127 @@
+/* ====== BASE DA CÂMERA (igual aos slides) ====== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#camera,
+#camera--view,
+#camera--sensor,
+#camera--output {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+#camera--view,
+#camera--sensor,
+#camera--output {
+  transform: scaleX(-1);
+  filter: FlipH;
+}
+
+#camera--trigger {
+  width: 200px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  position: fixed;
+  bottom: 30px;
+  left: calc(50% - 100px);
+}
+
+.taken {
+  height: 100px !important;
+  width: 100px !important;
+  transition: all 0.5s ease-in;
+  border: solid 3px white;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+}
+
+/* ====== CARDÁPIO OFFLINE ====== */
+#menu {
+  position: relative;
+  z-index: 3; /* fica na frente do vídeo da câmera */
+  background: rgba(255, 255, 255, 0.92);
+  padding: 16px;
+  max-width: 800px;
+  margin: 16px auto;
+  border-radius: 8px;
+}
+
+#menu h1, #menu h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+#dish-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+#dish-form input,
+#dish-form textarea,
+#dish-form button {
+  font-size: 1rem;
+  padding: 8px;
+}
+
+#dishes-list .dish {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+#dishes-list .dish img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+#dishes-list .dish .info h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+#dishes-list .dish .info p {
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+}
+
+#dishes-list .dish .info button {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+#menu {
+  position: relative;
+  z-index: 9999;      /* IMPORTANTE pra ficar na frente da câmera */
+  background: rgba(255, 255, 255, 0.92);
+  padding: 16px;
+  max-width: 800px;
+  margin: 16px auto;
+  border-radius: 8px;
+}
+
