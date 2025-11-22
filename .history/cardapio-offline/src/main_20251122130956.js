@@ -177,7 +177,7 @@ async function renderList() {
     dishesList.appendChild(div);
   });
 
-
+  // eventos de remover
   dishesList.querySelectorAll("button[data-id]").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = Number(btn.getAttribute("data-id"));
@@ -187,7 +187,8 @@ async function renderList() {
   });
 }
 
-
+/* ====== REGISTRO DO SERVICE WORKER ====== */
+/* Registramos o SW no load (async/await) conforme slides */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", async () => {
     try {

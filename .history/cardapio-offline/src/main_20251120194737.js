@@ -11,11 +11,12 @@ const cameraView = document.querySelector("#camera--view"),
 
 let lastPhotoDataUrl = null;
 
+
 function cameraStart() {
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then(function (stream) {
-      track = stream.getTracks()[0];
+      track = stream.getTracks()[0];   
       cameraView.srcObject = stream;
     })
     .catch(function (error) {
@@ -33,9 +34,9 @@ cameraTrigger.onclick = function () {
   cameraOutput.classList.add("taken");
   lastPhotoDataUrl = dataUrl;
 
+
   lastPhotoDataUrl = dataUrl;
 };
-
 
 window.addEventListener("load", cameraStart, false);
 
@@ -113,6 +114,8 @@ openDatabase()
   });
 
 
+
+// salvar prato
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -150,6 +153,7 @@ form.addEventListener("submit", async (e) => {
   await renderList();
 });
 
+// listar pratos
 async function renderList() {
   const dishes = await getAllDishes();
   dishesList.innerHTML = "";
@@ -177,7 +181,6 @@ async function renderList() {
     dishesList.appendChild(div);
   });
 
-
   dishesList.querySelectorAll("button[data-id]").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = Number(btn.getAttribute("data-id"));
@@ -187,14 +190,9 @@ async function renderList() {
   });
 }
 
-
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", async () => {
-    try {
-      const reg = await navigator.serviceWorker.register("/sw.js");
-      console.log("Service Worker registrado", reg);
-    } catch (err) {
-      console.error("Erro ao registrar SW", err);
-    }
-  });
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then((reg) => console.log("Service Worker registrado", reg))
+    .catch((err) => console.error("Erro ao registrar SW", err));
 }

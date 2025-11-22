@@ -4,18 +4,22 @@ var constraints = { video: { facingMode: "user" }, audio: false };
 
 let track = null;
 
+// Define constants
 const cameraView = document.querySelector("#camera--view"),
   cameraOutput = document.querySelector("#camera--output"),
   cameraSensor = document.querySelector("#camera--sensor"),
   cameraTrigger = document.querySelector("#camera--trigger");
 
+
+// Variável para guardar a última foto tirada (para salvar no cardápio)
 let lastPhotoDataUrl = null;
 
+// Access the device camera and stream to cameraView
 function cameraStart() {
   navigator.mediaDevices
     .getUserMedia(constraints)
     .then(function (stream) {
-      track = stream.getTracks()[0];
+      track = stream.getTracks()[0];   // agora funciona
       cameraView.srcObject = stream;
     })
     .catch(function (error) {
@@ -23,6 +27,7 @@ function cameraStart() {
     });
 }
 
+// Take a picture when cameraTrigger is tapped
 cameraTrigger.onclick = function () {
   cameraSensor.width = cameraView.videoWidth;
   cameraSensor.height = cameraView.videoHeight;
@@ -33,11 +38,15 @@ cameraTrigger.onclick = function () {
   cameraOutput.classList.add("taken");
   lastPhotoDataUrl = dataUrl;
 
+
+  // guarda a foto para o cardápio
   lastPhotoDataUrl = dataUrl;
 };
 
-
+// Start the video stream when the window loads
 window.addEventListener("load", cameraStart, false);
+
+/* ====== INDEXEDDB (armazenar prato + imagem) ====== */
 
 let db;
 
@@ -98,11 +107,11 @@ function removeDish(id) {
   });
 }
 
-
+// ----- elementos do cardápio -----
 const form = document.getElementById("dish-form");
 const dishesList = document.getElementById("dishes-list");
 
-
+// abrir DB e listar assim que o script carregar
 openDatabase()
   .then(() => {
     console.log("DB aberto na inicialização");
@@ -113,6 +122,8 @@ openDatabase()
   });
 
 
+
+// salvar prato
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -150,6 +161,7 @@ form.addEventListener("submit", async (e) => {
   await renderList();
 });
 
+// listar pratos
 async function renderList() {
   const dishes = await getAllDishes();
   dishesList.innerHTML = "";
@@ -159,6 +171,7 @@ async function renderList() {
     return;
   }
 
+  // mais recentes primeiro
   dishes.sort((a, b) => b.id - a.id);
 
   dishes.forEach((dish) => {
@@ -177,7 +190,7 @@ async function renderList() {
     dishesList.appendChild(div);
   });
 
-
+  // eventos de remover
   dishesList.querySelectorAll("button[data-id]").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = Number(btn.getAttribute("data-id"));
@@ -187,14 +200,10 @@ async function renderList() {
   });
 }
 
-
+/* ====== REGISTRO DO SERVICE WORKER ====== */
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", async () => {
-    try {
-      const reg = await navigator.serviceWorker.register("/sw.js");
-      console.log("Service Worker registrado", reg);
-    } catch (err) {
-      console.error("Erro ao registrar SW", err);
-    }
-  });
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then((reg) => console.log("Service Worker registrado", reg))
+    .catch((err) => console.error("Erro ao registrar SW", err));
 }

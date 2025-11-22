@@ -6,16 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Cardápio Offline</title>
+
     
     <link rel="manifest" href="./manifest.json" />
     <link rel="stylesheet" href="./cardapio-offline/CSS/style.css" />
   </head>
 
   <body>
+    <!-- ===================================== -->
+    <!--  BLOCO DA CÂMERA (igual aos slides)   -->
+    <!-- ===================================== -->
     <main id="camera">
+      <!-- Camera sensor -->
       <canvas id="camera--sensor"></canvas>
+      <!-- Camera view -->
       <video id="camera--view" autoplay playsinline></video>
+      <!-- Camera output -->
       <img src="//:0" alt="" id="camera--output" />
+      <!-- Camera trigger -->
       <button id="camera--trigger">Tirar foto</button>
     </main>
 
@@ -33,6 +41,7 @@
       <div id="dishes-list"></div>
     </section>
 
+        <!-- JS principal -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
